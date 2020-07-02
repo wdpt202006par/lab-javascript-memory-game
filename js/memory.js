@@ -38,11 +38,12 @@ class MemoryGame {
       this.pairsGuessed += 1;
       this.pairsClicked += 1;
       return true;
-    }else {
+    } else {
       this.pairsClicked += 1;
       return false;
     }
   }
+  
   isFinished() {
     //verifier que le nombre de pair est egale au nombre cartes divisé par 2
     var pair = this.cards.length/2;

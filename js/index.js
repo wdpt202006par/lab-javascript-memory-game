@@ -39,10 +39,47 @@ window.addEventListener('load', event => {
   // Add all the divs to the HTML
   document.querySelector('#memory-board').innerHTML = html;
 
+  function showCard($card) {
+    // TODO: ajouter la classe "turned" à $card
+    $card.classList.add('turned');
+  }
+
+  function hideCard($card) {
+    // TODO: retirer la classe "turned" à $card
+    $card.classList.remove("turned");
+  }
+
+  function cardName($card) {
+    // fonction qui retourne le nom de la $card, par ex: "the avengers" (écrit dans l'attribut data-card-name)
+    return $card.dataset.cardName; 
+  }
+
+  let firstCard; // undefined
+
   // Bind the click event of each element to a function
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       // TODO: write some code here
+
+      if (firstCard) {
+        showCard(card);
+        memoryGame.checkIfPair(firstCard, card);
+
+        //si bon
+        if (memoryGame.checkIfPair === true) {
+          //rien, puisque incremente dans fonction checkIfPair
+          //puis laisser show, pour retenir que la paire est OK
+        } else {
+          hideCard(card);
+          hideCard(firstCard);
+          firstCard = undefined;
+        }
+
+      } else {
+        showCard(card);
+        firstCard = card;
+      }
+
       console.log(`Card clicked: ${card}`);
     });
   });
