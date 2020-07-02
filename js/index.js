@@ -27,6 +27,9 @@ const cards = [
 
 const memoryGame = new MemoryGame(cards);
 
+
+
+
 window.addEventListener('load', event => {
   let html = '';
   memoryGame.cards.forEach(pic => {
@@ -38,14 +41,30 @@ window.addEventListener('load', event => {
 
   // Add all the divs to the HTML
   document.querySelector('#memory-board').innerHTML = html;
+  
+  
 
   // Bind the click event of each element to a function
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
-      // TODO: write some code here
+      card.classList.add('turned'); 
+      })
       console.log(`Card clicked: ${card}`);
     });
   });
-});
 
 
+
+    function showCard($card) {
+        card.classList.add('turned');
+      }
+
+    function hideCard($card) {
+        card.classList.remove('turned');
+      }
+
+    function cardName($card) {
+        
+        // fonction qui retourne le nom de la $card, par ex: "the avengers" (écrit dans l'attribut data-card-name)
+        return $card.dataset.cardName; 
+    }
