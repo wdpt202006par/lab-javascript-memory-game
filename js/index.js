@@ -65,11 +65,3 @@ window.addEventListener('load', event => {
     });
   });
 });
-
-function update(){
-	const pairsClicked = document.getElementById('pairs-clicked');
-	const pairsGuessed = document.getElementById('pairs-guessed');
-
-	pairsClicked.innerHTML = memoryGame.pairsClicked;
-	pairsGuessed.innerHTML = memoryGame.pairsGuessed;
-}
