@@ -38,12 +38,39 @@ window.addEventListener('load', event => {
 
   // Add all the divs to the HTML
   document.querySelector('#memory-board').innerHTML = html;
+  let playedCard = {}
 
   // Bind the click event of each element to a function
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       // TODO: write some code here
-      console.log(`Card clicked: ${card}`);
+      
+      card.classList.toggle("turned", !cardClassList.includes("turned"))
+      
+      playedCard = card
+      /*
+      if (!cardClassList.includes("turned")){
+        console.log("b")
+        showCard(card)
+      } else{
+        console.log("a")
+        hideCard(card)
+      }
+      */
+
     });
   });
 });
+
+function showCard($card) {
+  $card.classList.add("turned")
+}
+function hideCard($card) {
+  console.log("inside Hide")
+  $card.classList.remove("turned")
+  // TODO: retirer la classe "turned" à $card
+}
+function cardName($card) {
+  // fonction qui retourne le nom de la $card, par ex: "the avengers" (écrit dans l'attribut data-card-name)
+  return $card.dataset.cardName; 
+}
