@@ -45,9 +45,20 @@ window.addEventListener('load', event => {
   const cards = document.querySelectorAll('.card')
   cards.forEach(card => {
     card.addEventListener('click', () => {
+      showCard(card);
       if (playingCard) {
-        // 
-
+        let nameOfPlayingCard = cardName(playingCard);
+        let nameOfCurrentCard = cardName(card);
+        let result = memoryGame.checkIfPair(nameOfPlayingCard, nameOfCurrentCard);
+        if (result === true) {
+          // rester ouvert add blocked
+          playingCard.classList.add("blocked");
+          card.classList.add("blocked");
+        } else {
+          // remove "turned" les deux cards
+          hideCard(card);
+          hideCard(playingCard);
+        }
         playingCard = undefined
       } else {
         playingCard = card
@@ -56,11 +67,7 @@ window.addEventListener('load', event => {
       // TODO: write some code here
       // card.classList.add('turned');
       // console.log(`Card clicked: ${card}`);
-      if (card.classList.contains('turned')) {
-        showCard(card);
-      } else {
-        hideCard(card);
-      }
+
     });
   });
 });
