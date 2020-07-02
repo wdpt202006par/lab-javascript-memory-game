@@ -40,30 +40,36 @@ window.addEventListener('load', event => {
   document.querySelector('#memory-board').innerHTML = html;
 
   // Bind the click event of each element to a function
-  let click=0;
+	// let click=0;
+	
   document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('click', () => {
+		card.addEventListener('click', () => {
 			// TODO: write some code here
-      if(click<2){
-        click++;
-        card.classList.toggle('turned');
-        console.log(`Card clicked: ${card}`);
-      }else {
+			card.classList.toggle('turned');
+			memoryGame.pickedCards.push(card);
 
-      }
+			if (memoryGame.pickedCards.length === 2) {
+				const card1 = memoryGame.pickedCards[0].getAttribute('data-card-name');
+				const card2 = memoryGame.pickedCards[1].getAttribute('data-card-name');
+				console.log(card1, card2);
+
+			const isMatch = memoryGame.checkIfPair(card1, card2);
 			
+				if (isMatch) {
+					memoryGame.pickedCards = [];
+				} else {
+					memoryGame.pickedCards.forEach(card => card.classList.remove('turned'));
+					memoryGame.pickedCards = [];
+				}
+			}
     });
   });
 });
-function showCard($card) {
-  // TODO: ajouter la classe "turned" à $card
-  card.classList.toggle('turned');
-}
-function hideCard($card) {
-  // TODO: retirer la classe "turned" à $card
-  card.classList.remove('turned')
-}
-function cardName($card) {
-  // fonction qui retourne le nom de la $card, par ex: "the avengers" (écrit dans l'attribut data-card-name)
-  return $card.dataset.cardName; 
+
+function update(){
+	const pairsClicked = document.getElementById('pairs-clicked');
+	const pairsGuessed = document.getElementById('pairs-guessed');
+
+	pairsClicked.innerHTML = memoryGame.pairsClicked;
+	pairsGuessed.innerHTML = memoryGame.pairsGuessed;
 }
