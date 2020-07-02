@@ -39,11 +39,41 @@ window.addEventListener('load', event => {
   // Add all the divs to the HTML
   document.querySelector('#memory-board').innerHTML = html;
 
+  let playingCard; // undefined
+
   // Bind the click event of each element to a function
-  document.querySelectorAll('.card').forEach(card => {
+  const cards = document.querySelectorAll('.card')
+  cards.forEach(card => {
     card.addEventListener('click', () => {
+      if (playingCard) {
+        // 
+
+        playingCard = undefined
+      } else {
+        playingCard = card
+      }
+
       // TODO: write some code here
-      console.log(`Card clicked: ${card}`);
+      // card.classList.add('turned');
+      // console.log(`Card clicked: ${card}`);
+      if (card.classList.contains('turned')) {
+        showCard(card);
+      } else {
+        hideCard(card);
+      }
     });
   });
 });
+
+function showCard($card) {
+  // TODO: ajouter la classe "turned" à $card
+  $card.classList.add('turned');
+}
+function hideCard($card) {
+  // TODO: retirer la classe "turned" à $card
+  $card.classList.remove('turned');
+}
+function cardName($card) {
+  // fonction qui retourne le nom de la $card, par ex: "the avengers" (écrit dans l'attribut data-card-name)
+  return $card.dataset.cardName; 
+}
