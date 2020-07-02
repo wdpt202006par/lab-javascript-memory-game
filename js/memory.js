@@ -1,5 +1,5 @@
 class MemoryGame {
-  constructor(cards){
+  constructor(cards) {
     this.cards = cards;
     this.pickedCards = [];
     this.pairsClicked = 0;
@@ -7,11 +7,11 @@ class MemoryGame {
   }
 
   shuffleCards() {
-      var j, x, i;
-      for (i = this.cards.length - 1; i > 0; i--) {
-          j = Math.floor(Math.random() * (i + 1));
-          this.cards[i] = this.cards[j];
-      }
+    var j, x, i;
+    for (i = this.cards.length - 1; i > 0; i--) {
+      j = Math.floor(Math.random() * (i + 1));
+      this.cards[i] = this.cards[j];
+    }
   }
   checkIfPair(card1, card2) {
     if (card1 === card2) {
@@ -25,12 +25,13 @@ class MemoryGame {
   }
 
   isFinished() {
-    if (this.pairsGuessed === 0) {
-      return false;
-    } else if (this.pairsGuessed < 8) {
-      return false;
-    } else {
-      return true;
-    }
+    return this.pairsGuessed >= (this.cards.length / 2);
+    // if (this.pairsGuessed === 0) {
+    //   return false;
+    // } else if (this.pairsGuessed < 8) {
+    //   return false;
+    // } else {
+    //   return true;
+    // }
   }
 }
