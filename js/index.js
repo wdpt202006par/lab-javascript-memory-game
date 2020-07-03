@@ -40,36 +40,52 @@ window.addEventListener('load', event => {
   document.querySelector('#memory-board').innerHTML = html;
 
   let playingCard; // undefined
+  let count = 0;
 
   // Bind the click event of each element to a function
   const cards = document.querySelectorAll('.card')
   cards.forEach(card => {
     card.addEventListener('click', () => {
-      showCard(card);
-      if (playingCard) {
-        let nameOfPlayingCard = cardName(playingCard);
-        let nameOfCurrentCard = cardName(card);
-        let result = memoryGame.checkIfPair(nameOfPlayingCard, nameOfCurrentCard);
-        if (result === true) {
-          // rester ouvert add blocked
-          playingCard.classList.add("blocked");
-          card.classList.add("blocked");
-          playingCard=undefined;
-        } else {
-          setTimeout(function () {
-            hideCard(card);
-            hideCard(playingCard);
-            playingCard = undefined;
-          },1000);
-        }
-      } else {
-        playingCard = card;
-      }
-      // console.log(`Card clicked: ${card}`);
+      if (count < 2) {
+        showCard(card);
+        count++;
+        if (playingCard) {
+          let nameOfPlayingCard = cardName(playingCard);
+          let nameOfCurrentCard = cardName(card);
+          let result = memoryGame.checkIfPair(nameOfPlayingCard, nameOfCurrentCard);
+          let countPairsClicked = document.querySelector("#pairs-clicked");
+          countPairsClicked.innerHTML = memoryGame.pairsClicked;
+          if (result === true) {
+            // rester ouvert add blocked
+            playingCard.classList.add("blocked");
+            card.classList.add("blocked");
+            playingCard=undefined;
+            count = 0;
+            let countPairsGuessed = document.querySelector("#pairs-guessed");
+            countPairsGuessed.innerHTML = memoryGame.pairsGuessed;
+            let check = memoryGame.isFinished();
+            if (check) {
+              setTimeout(function () {
+                alert(`You win after ${memoryGame.pairsClicked} pairs clicked`);
+              },1000);
+            }
+          } else {
+            setTimeout(function () {
+              hideCard(card);
+              hideCard(playingCard);
+              playingCard = undefined;
+              count = 0;
 
+            },800);
+          }
+        } else {
+          playingCard = card;
+        }
+      };
     });
   });
 });
+
 
 function showCard($card) {
   // TODO: ajouter la classe "turned" à $card
