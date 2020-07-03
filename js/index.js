@@ -54,18 +54,17 @@ window.addEventListener('load', event => {
           // rester ouvert add blocked
           playingCard.classList.add("blocked");
           card.classList.add("blocked");
+          playingCard=undefined;
         } else {
-          // remove "turned" les deux cards
-          hideCard(card);
-          hideCard(playingCard);
+          setTimeout(function () {
+            hideCard(card);
+            hideCard(playingCard);
+            playingCard = undefined;
+          },1000);
         }
-        playingCard = undefined
       } else {
-        playingCard = card
+        playingCard = card;
       }
-
-      // TODO: write some code here
-      // card.classList.add('turned');
       // console.log(`Card clicked: ${card}`);
 
     });
