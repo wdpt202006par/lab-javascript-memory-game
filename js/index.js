@@ -29,6 +29,7 @@ const memoryGame = new MemoryGame(cards);
 
 window.addEventListener('load', event => {
   let html = '';
+  memoryGame.shuffleCards();
   memoryGame.cards.forEach(pic => {
     html += `<div class="card" data-card-name="${pic.name}">`;
     html += `<div class="back" name="${pic.img}"></div>`;
@@ -39,11 +40,46 @@ window.addEventListener('load', event => {
   // Add all the divs to the HTML
   document.querySelector('#memory-board').innerHTML = html;
 
+  function showCard($card) {
+    $card.classList.add('turned')
+  }
+  function hideCard($card) {
+    $card.classList.remove('turned')
+  }
+  function cardName($card) { // prend un element html en paramètre
+    return $card.dataset.cardName;
+  }
+
   // Bind the click event of each element to a function
+  let playingCard;
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
-      // TODO: write some code here
-      console.log(`Card clicked: ${card}`);
+      showCard(card);
+      if (playingCard) {
+        if (memoryGame.checkIfPair(cardName(card), cardName(playingCard))) {
+          playingCard = undefined;// OK et nouveau tour de jeu
+        } else {
+          setTimeout(function(){
+            hideCard(playingCard);
+            hideCard(card);
+            playingCard = undefined; // NO et nouveau tour de jeu
+          }, 500);
+        }
+      } else {
+        // let's define our new `playingCard` (the one we will try to find the next click)
+        playingCard = card;
+      }
+      // re-render score
+        let click = document.getElementById('pairs-clicked');
+        click.innerHTML = memoryGame.pairsClicked;
+
+        let pairs = document.getElementById('pairs-guessed');
+        pairs.innerHTML = memoryGame.pairsGuessed;
+      
+      // Quand le jeu est terminé
+      if (memoryGame.isFinished()) {
+        alert('You win!');
+      }
     });
   });
 });
