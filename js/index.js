@@ -44,6 +44,7 @@ window.addEventListener('load', event => {
   document.querySelector('#memory-board').innerHTML = html;
 
   // Bind the click event of each element to a function
+<<<<<<< HEAD
   let clic=0;
   document.querySelectorAll('.card').forEach((card, index) => {
     card.addEventListener('click', () => {
@@ -71,6 +72,30 @@ window.addEventListener('load', event => {
           clic=0
         }
       }
+=======
+	// let click=0;
+	
+  document.querySelectorAll('.card').forEach(card => {
+		card.addEventListener('click', () => {
+			// TODO: write some code here
+			card.classList.toggle('turned');
+			memoryGame.pickedCards.push(card);
+
+			if (memoryGame.pickedCards.length === 2) {
+				const card1 = memoryGame.pickedCards[0].getAttribute('data-card-name');
+				const card2 = memoryGame.pickedCards[1].getAttribute('data-card-name');
+				console.log(card1, card2);
+
+			const isMatch = memoryGame.checkIfPair(card1, card2);
+			
+				if (isMatch) {
+					memoryGame.pickedCards = [];
+				} else {
+					memoryGame.pickedCards.forEach(card => card.classList.remove('turned'));
+					memoryGame.pickedCards = [];
+				}
+			}
+>>>>>>> 61dd90f92c73f36fdaaeed551bc8e45f4eae7ecf
     });
   })
 });

@@ -7,6 +7,7 @@ class MemoryGame {
     this.pairsGuessed = 0;
   }
   shuffleCards() {
+<<<<<<< HEAD
 		// let i = this.cards.length;
 		// let randomCard;
 		// let shuffleCards;
@@ -23,6 +24,24 @@ class MemoryGame {
     this.cards.sort(function (a, b) {
       return Math.random() - 0.5; // [-.5--0---.5]
     })
+=======
+		let i = this.cards.length;
+		let randomCard;
+		let shuffleCards;
+
+		while (--i > 0) {
+			randomCard = Math.floor(Math.random() * (i));
+			shuffleCards = this.cards[randomCard];
+			this.cards[randomCard] = this.cards[i];
+			shuffleCards = this.cards[i];
+		}
+
+    //
+
+  //  ) this.cards.sort(function (a, b) {
+  //     return Math.random() - 0.5; // [-.5--0---.5]
+  //   })
+>>>>>>> 61dd90f92c73f36fdaaeed551bc8e45f4eae7ecf
 	}
   checkIfPair(card1, card2) {
 		this.pairsClicked ++;
