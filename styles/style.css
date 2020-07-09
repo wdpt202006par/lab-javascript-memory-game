@@ -3,6 +3,7 @@ body {
 
   background: url('../img/background.jpg') no-repeat;
   background-size: cover;
+  height: auto;
   font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -11,7 +12,7 @@ body {
   width: 800px;
   height: 540px;
   padding: 70px;
-  margin: 0px auto;
+  margin: 0px auto 30px auto;
   border-radius: 84px;
   box-shadow: inset 0px 0px 20px -6px rgba(97, 89, 97, 1);
 }
@@ -79,6 +80,7 @@ h1 {
   font-size: 67px;
   text-align: center;
   text-shadow: 0px 0px 20px rgba(150, 150, 150, 1);
+  margin: 10px;
 }
 
 h2 {
@@ -88,6 +90,7 @@ h2 {
   text-align: center;
   text-shadow: 1px #ff0000;
   text-shadow: 1px #ff0000;
+  margin: 10px;
 }
 
 p {
