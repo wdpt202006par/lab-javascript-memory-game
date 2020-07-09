@@ -75,7 +75,7 @@ window.addEventListener('load', event => {
           }, 500);
         }
 
-        $playingCard = undefined; // we reset `$playingCards`
+        $playingCard = undefined; // we reset `$playingCard`
       } else {
         // let's define our new `$playingCard` (the one we will try to find the next click)
         $playingCard = $card;
